@@ -181,46 +181,32 @@
         }
 
         header {
-            background: rgba(15, 12, 41, 0.95);
+            background: rgba(15, 12, 41, 0.98);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 12px 15px;
+            padding: 10px 15px;
             display: flex;
-            flex-direction: column;
+            width: 100%;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
             border-bottom: 3px solid var(--we-cyan);
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        @media (min-width: 768px) {
-            header {
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 15px 35px;
-            }
+            flex-wrap: nowrap;
+            overflow-x: auto;
         }
 
         header .header-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: 100%;
-            justify-content: center;
-        }
-
-        @media (min-width: 768px) {
-            header .header-title {
-                width: auto;
-                justify-content: flex-start;
-            }
+            gap: 8px;
+            flex-shrink: 0;
         }
 
         header h1 {
-            font-size: 16px;
+            font-size: 13px;
             color: var(--we-cyan);
-            letter-spacing: 0.5px;
-            text-align: center;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
         }
 
         @media (min-width: 768px) {
@@ -233,36 +219,30 @@
             background: var(--we-cyan);
             color: #000;
             font-weight: 900;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
         }
 
         nav {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 6px;
-            width: 100%;
-        }
-
-        @media (min-width: 768px) {
-            nav {
-                width: auto;
-                justify-content: flex-end;
-            }
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 5px;
+            align-items: center;
         }
 
         nav button {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 5px 8px;
+            border-radius: 5px;
             transition: all 0.3s;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         @media (min-width: 768px) {
@@ -514,9 +494,9 @@
                 <h1>منصة تكنولوجيا المستقبل</h1>
             </div>
             <nav>
-                <button class="active" onclick="switchTab('courses', this)">المناهج واليوتيوب</button>
-                <button onclick="switchTab('break', this)">استراحة البريك</button>
-                <button onclick="switchTab('planner', this)">منظم اليوم</button>
+                <button class="active" onclick="switchTab('courses', this)">المناهج</button>
+                <button onclick="switchTab('break', this)">البريك</button>
+                <button onclick="switchTab('planner', this)">المنظم</button>
                 <button onclick="logout()" style="color: #ff8a80;">خروج</button>
             </nav>
         </header>
@@ -707,147 +687,4 @@
             containers.forEach(c => c.classList.remove('active'));
 
             let target = document.getElementById('game-' + gameNum);
-            if(target) target.classList.add('active');
-
-            if(gameNum === 4) initMathGame();
-        }
-
-        // الألعاب
-        let secret1 = Math.floor(Math.random() * 10) + 1;
-        function playG1() {
-            let val = parseInt(document.getElementById("g1-input").value);
-            let res = document.getElementById("g1-res");
-            if(val === secret1) {
-                res.style.color = "green";
-                res.innerText = "🎉 برافو! خمنت الرقم الصحيح.";
-                secret1 = Math.floor(Math.random() * 10) + 1;
-            } else if(val < secret1) {
-                res.style.color = "orange";
-                res.innerText = "📈 الرقم أعلى من كده!";
-            } else {
-                res.style.color = "orange";
-                res.innerText = "📉 الرقم أقل من كده!";
-            }
-        }
-
-        function playG2() {
-            let dice = Math.floor(Math.random() * 6) + 1;
-            document.getElementById("g2-res").innerText = "🎲 نتيجة رمي النرد: " + dice;
-        }
-
-        let startTime;
-        function playG3() {
-            startTime = new Date().getTime();
-            setTimeout(() => {
-                document.getElementById("g3-res").innerText = "⏱️ تم تسجيل سرعة رد فعلك بنجاح!";
-            }, 200);
-        }
-
-        let numA, numB;
-        function initMathGame() {
-            numA = Math.floor(Math.random() * 20) + 1;
-            numB = Math.floor(Math.random() * 20) + 1;
-            let mathQ = document.getElementById("math-q");
-            if (mathQ) mathQ.innerText = `${numA} + ${numB}`;
-        }
-        function playG4() {
-            let ans = parseInt(document.getElementById("g4-input").value);
-            let res = document.getElementById("g4-res");
-            if(ans === (numA + numB)) {
-                res.style.color = "green";
-                res.innerText = "✨ إجابة صحيحة وعبقرية!";
-                initMathGame();
-            } else {
-                res.style.color = "red";
-                res.innerText = "❌ حاول مرة أخرى.";
-            }
-        }
-
-        function playG5(choice) {
-            let colors = ['أحمر', 'أزرق'];
-            let luck = colors[Math.floor(Math.random() * colors.length)];
-            let res = document.getElementById("g5-res");
-            if(choice === luck) {
-                res.style.color = "green";
-                res.innerText = `🎯 مبروك! اخترت اللون الصحيح (${luck}).`;
-            } else {
-                res.style.color = "orange";
-                res.innerText = `❌ لون الحظ كان (${luck}).`;
-            }
-        }
-
-        function playG6() {
-            let luckNum = Math.floor(Math.random() * 101);
-            document.getElementById("g6-res").innerText = `⚡ نسبة كفاءتك البرمجية اليوم: ${luckNum}%`;
-        }
-
-        function playG7() {
-            let val = document.getElementById("g7-input").value;
-            let res = document.getElementById("g7-res");
-            if(val === "8492") {
-                res.style.color = "green";
-                res.innerText = "🧠 ذاكرتك ممتازة!";
-            } else {
-                res.style.color = "red";
-                res.innerText = "❌ الكود الصحيح هو 8492.";
-            }
-        }
-
-        function playG8(playerChoice) {
-            let options = ['حجر', 'ورقة', 'مقص'];
-            let compChoice = options[Math.floor(Math.random() * options.length)];
-            let res = document.getElementById("g8-res");
-            if(playerChoice === compChoice) {
-                res.style.color = "orange";
-                res.innerText = `🤝 تعادل! الكمبيوتر اختار (${compChoice})`;
-            } else if(
-                (playerChoice === 'حجر' && compChoice === 'مقص') ||
-                (playerChoice === 'ورقة' && compChoice === 'حجر') ||
-                (playerChoice === 'مقص' && compChoice === 'ورقة')
-            ) {
-                res.style.color = "green";
-                res.innerText = `🎉 فزت! الكمبيوتر اختار (${compChoice})`;
-            } else {
-                res.style.color = "red";
-                res.innerText = `😢 خسرت! الكمبيوتر اختار (${compChoice})`;
-            }
-        }
-
-        function playG9() {
-            let age = parseFloat(document.getElementById("g9-input").value);
-            let res = document.getElementById("g9-res");
-            if(isNaN(age) || age <= 0) {
-                res.innerText = "الرجاء إدخال عمر صحيح.";
-            } else {
-                let mins = age * 365 * 24 * 60;
-                res.style.color = "blue";
-                res.innerText = `⏳ عمرك يعادل تقريباً: ${mins.toLocaleString()} دقيقة من المعرفة!`;
-            }
-        }
-
-        function playG10() {
-            let msgs = [
-                "🚀 مبرمج الغد يبدأ اليوم، استمر في التعلم!",
-                "💡 كل سطر برمجي يفتح لك باباً جديداً من الإمكانيات.",
-                "⭐ مدرسة WE تفتح لك أبواب التكنولوجيا التطبيقية، فكن على قدر المسؤولية.",
-                "🔥 العقول العظيمة تصنع البرمجيات التي تغير العالم!"
-            ];
-            document.getElementById("g10-res").innerText = msgs[Math.floor(Math.random() * msgs.length)];
-        }
-
-        // منظم اليوم
-        function addTask() {
-            let taskInput = document.getElementById("taskInput");
-            let text = taskInput.value.trim();
-            if(text === "") return;
-
-            let ul = document.getElementById("taskList");
-            let li = document.createElement("li");
-            li.innerHTML = `<span>${text}</span> <button onclick="this.parentElement.remove()">إنجاز / حذف</button>`;
-            ul.appendChild(li);
-
-            taskInput.value = "";
-        }
-    </script>
-</body>
-</html>
+            if
