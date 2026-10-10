@@ -496,7 +496,7 @@
             </nav>
         </header>
 
-        <div class="main-content">
+        <main class="main-content">
             <!-- تبويب المناهج -->
             <div id="courses" class="tab-content active">
                 <h3>المناهج الدراسية مع روابط الشرح</h3>
@@ -630,7 +630,7 @@
                 </div>
                 <ul id="taskList"></ul>
             </div>
-        </div>
+        </main>
     </div>
 
     <script>
@@ -644,15 +644,18 @@
             const role = localStorage.getItem("we_role");
             if (logged === "true" && role) {
                 initSession(role);
+            } else {
+                document.getElementById("login-screen").style.display = "flex";
+                document.getElementById("app-screen").style.display = "none";
             }
         });
 
         function switchToAdminMode() {
             document.getElementById("login-title").innerText = "بوابة دخول الإدارة";
             document.getElementById("login-subtitle").innerText = "أدخل بيانات حساب الإدارة الخاص بك (weismailia)";
-            document.getElementById("username").value = "";
+            document.getElementById("username").value = "weismailia";
             document.getElementById("password").value = "";
-            document.getElementById("username").focus();
+            document.getElementById("password").focus();
             document.getElementById("error").innerText = "";
         }
 
