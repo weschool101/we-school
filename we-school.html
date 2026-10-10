@@ -28,7 +28,7 @@
             overflow-x: hidden;
         }
 
-        /* خلفية تفصيلية متقدمة */
+        /* الخلفية التقنية الاحترافية */
         .tech-background {
             position: fixed;
             top: 0;
@@ -162,6 +162,12 @@
         .btn:hover {
             opacity: 0.95;
             transform: translateY(-2px);
+        }
+
+        .admin-switch-btn {
+            background: #2f3640;
+            color: white;
+            margin-top: 10px;
         }
 
         .error-msg {
@@ -301,7 +307,7 @@
             }
         }
 
-        /* المناهج التعليمية وتنسيق اللينكات */
+        /* المناهج الدراسية */
         .lesson-card {
             background: #f8f9fa;
             padding: 16px;
@@ -325,11 +331,9 @@
             font-weight: bold;
             transition: opacity 0.2s;
         }
-        .yt-link:hover {
-            opacity: 0.85;
-        }
+        .yt-link:hover { opacity: 0.85; }
 
-        /* شاشة الألعاب الـ 10 */
+        /* ألعاب البريك */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -380,22 +384,10 @@
             display: none;
         }
 
-        .game-container.active {
-            display: block;
-        }
-
-        .game-container h4 {
-            font-size: 17px;
-            color: var(--we-purple);
-            margin-bottom: 8px;
-        }
-
-        .game-container p {
-            font-size: 14px;
-            color: #444;
-        }
-
-        .game-box input, .game-container input {
+        .game-container.active { display: block; }
+        .game-container h4 { font-size: 17px; color: var(--we-purple); margin-bottom: 8px; }
+        .game-container p { font-size: 14px; color: #444; }
+        .game-container input {
             padding: 10px;
             border-radius: 6px;
             border: 1px solid #ccc;
@@ -405,7 +397,7 @@
             font-size: 15px;
         }
 
-        /* منظم اليوم */
+        /* منظم المهام والواجبات */
         .todo-input-group {
             display: flex;
             flex-direction: column;
@@ -414,9 +406,7 @@
         }
 
         @media (min-width: 500px) {
-            .todo-input-group {
-                flex-direction: row;
-            }
+            .todo-input-group { flex-direction: row; }
         }
 
         .todo-input-group input {
@@ -465,15 +455,15 @@
 </head>
 <body>
 
-    <!-- الخلفية التقنية التفصيلية -->
     <div class="tech-background"></div>
 
     <!-- شاشة تسجيل الدخول -->
     <div id="login-screen">
         <div class="login-card">
             <div class="logo-badge">WE SCHOOL</div>
-            <h2>بوابة دخول الطلاب</h2>
-            <p>منصة مدرسة WE للتكنولوجيا التطبيقية</p>
+            <h2 id="login-title">بوابة الدخول</h2>
+            <p id="login-subtitle">منصة مدرسة WE للتكنولوجيا التطبيقية</p>
+            
             <div class="form-group">
                 <label for="username">اسم المستخدم (Username)</label>
                 <input type="text" id="username" placeholder="أدخل اسم المستخدم">
@@ -482,7 +472,10 @@
                 <label for="password">كلمة المرور (Password)</label>
                 <input type="password" id="password" placeholder="أدخل كلمة المرور">
             </div>
+            
             <button class="btn" type="button" onclick="login()">تسجيل الدخول</button>
+            <button class="btn admin-switch-btn" type="button" onclick="switchToAdminMode()">الإدارة</button>
+            
             <div id="error" class="error-msg"></div>
         </div>
     </div>
@@ -492,10 +485,11 @@
         <header>
             <div class="header-title">
                 <span class="we-mini-logo">WE</span>
-                <h1>منصة تكنولوجيا المستقبل</h1>
+                <h1 id="header-title">منصة تكنولوجيا المستقبل</h1>
             </div>
             <nav>
                 <button class="active" onclick="switchTab('courses', this)">المناهج واليوتيوب</button>
+                <button onclick="switchTab('homework', this)">الواجبات المطلوبة</button>
                 <button onclick="switchTab('break', this)">استراحة البريك</button>
                 <button onclick="switchTab('planner', this)">منظم اليوم</button>
                 <button onclick="logout()" style="color: #ff8a80;">خروج</button>
@@ -503,77 +497,86 @@
         </header>
 
         <div class="main-content">
-            <!-- تبويب المناهج والشروحات -->
+            <!-- تبويب المناهج -->
             <div id="courses" class="tab-content active">
-                <h3>المناهج الدراسية مع روابط الشرح الحقيقية</h3>
-                
+                <h3>المناهج الدراسية مع روابط الشرح</h3>
                 <div class="lesson-card">
                     <h4>شرح math مبسط</h4>
                     <p>شرح مبسط لتمارين النسبة والتناسب (Ratio and Proportion) وخصائصها لطلاب مدارس التكنولوجيا التطبيقية.</p>
                     <a href="https://youtu.be/yJy9M7PIc3k?si=pYCeQTMyiFD0eTt-" target="_blank" class="yt-link">▶ مشاهدة شرح الـ Math على يوتيوب</a>
                 </div>
-
                 <div class="lesson-card">
-                    <h4>شرح مبسط لـ Motherboard (اللوحة الأم ومكونات الكمبيوتر)</h4>
-                    <p>استعراض مبسط ومختصر لأهم مكونات الكمبيوتر الداخلية ووظيفة اللوحة الأم (Motherboard) وباقي الوحدات.</p>
+                    <h4>شرح مبسط لـ Motherboard (اللوحة الأم)</h4>
+                    <p>استعراض مبسط لأهم مكونات الكمبيوتر الداخلية ووظيفة اللوحة الأم (Motherboard).</p>
                     <a href="https://youtu.be/ppuxNaDz-Gc?si=KUUZ-VxrAzvcwtxu" target="_blank" class="yt-link">▶ مشاهدة شرح المذر بورد على يوتيوب</a>
                 </div>
             </div>
 
-            <!-- تبويب استراحة البريك (10 ألعاب ذكاء) -->
-            <div id="break" class="tab-content">
-                <h3>اختر لعبة لتجديد نشاط عقلك وقت البريك:</h3>
+            <!-- تبويب الواجبات المطلوبة -->
+            <div id="homework" class="tab-content">
+                <h3>الواجبات المطلوبة للطلاب</h3>
                 
-                <div class="games-grid">
-                    <button class="game-btn" onclick="openGame(1)">1. تخمين الرقم السري</button>
-                    <button class="game-btn" onclick="openGame(2)">2. حجر النرد السريع</button>
-                    <button class="game-btn" onclick="openGame(3)">3. اختبار سرعة التفاعل</button>
-                    <button class="game-btn" onclick="openGame(4)">4. تحدي الجمع الذهني</button>
-                    <button class="game-btn" onclick="openGame(5)">5. تخمين لون الحظ</button>
-                    <button class="game-btn" onclick="openGame(6)">6. عداد إبداعك اليومي</button>
-                    <button class="game-btn" onclick="openGame(7)">7. اختبار الذاكرة الرقمية</button>
-                    <button class="game-btn" onclick="openGame(8)">8. حجر - ورقة - مقص</button>
-                    <button class="game-btn" onclick="openGame(9)">9. حاسبة عمرك بالدقائق</button>
-                    <button class="game-btn" onclick="openGame(10)">10. رسالة التحفيز التقني</button>
+                <!-- لوحة الإدارة لنشر الواجبات -->
+                <div id="admin-homework-box" style="display: none; margin-bottom: 20px; background: #f0f8ff; padding: 15px; border-radius: 8px; border: 1px solid #00e1ff;">
+                    <p style="font-weight: bold; color: var(--we-purple); margin-bottom: 8px;">⚙️ لوحة تحكم الإدارة (نشر واجب جديد للجميع):</p>
+                    <div class="todo-input-group">
+                        <input type="text" id="homeworkInput" placeholder="اكتب الواجب المطلوب للطلاب...">
+                        <button class="btn" style="width: auto; padding: 12px 20px;" onclick="addHomework()">نشر الواجب</button>
+                    </div>
                 </div>
 
-                <!-- حاويات الألعاب -->
+                <ul id="homeworkList">
+                    <!-- الواجبات تظهر هنا للجميع -->
+                </ul>
+            </div>
+
+            <!-- تبويب البريك والألعاب -->
+            <div id="break" class="tab-content">
+                <h3>اختر لعبة لتجديد نشاط عقلك:</h3>
+                <div class="games-grid">
+                    <button class="game-btn" onclick="openGame(1)">1. تخمين الرقم</button>
+                    <button class="game-btn" onclick="openGame(2)">2. حجر النرد</button>
+                    <button class="game-btn" onclick="openGame(3)">3. سرعة التفاعل</button>
+                    <button class="game-btn" onclick="openGame(4)">4. الجمع الذهني</button>
+                    <button class="game-btn" onclick="openGame(5)">5. لون الحظ</button>
+                    <button class="game-btn" onclick="openGame(6)">6. كفاءتك البرمجية</button>
+                    <button class="game-btn" onclick="openGame(7)">7. اختبار الذاكرة</button>
+                    <button class="game-btn" onclick="openGame(8)">8. حجر ورقة مقص</button>
+                    <button class="game-btn" onclick="openGame(9)">9. عمرك بالدقائق</button>
+                    <button class="game-btn" onclick="openGame(10)">10. رسالة تحفيزية</button>
+                </div>
+
                 <div id="game-1" class="game-container">
-                    <h4>1. لعبة تخمين الرقم</h4>
+                    <h4>1. تخمين الرقم</h4>
                     <p>اختر رقماً من 1 إلى 10:</p>
-                    <input type="number" id="g1-input" placeholder="اكتب رقم">
-                    <br>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG1()">تأكيد</button>
+                    <input type="number" id="g1-input">
+                    <br><button class="btn" style="width:auto; padding:6px 15px; margin-top:8px;" onclick="playG1()">تأكيد</button>
                     <p id="g1-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-2" class="game-container">
-                    <h4>2. حجر النرد السريع</h4>
-                    <p>اضغط للرمي والحصول على رقم عشوائي (1 إلى 6):</p>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG2()">ارْمِ النرد</button>
+                    <h4>2. حجر النرد</h4>
+                    <button class="btn" style="width:auto; padding:6px 15px;" onclick="playG2()">ارْمِ النرد</button>
                     <p id="g2-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-3" class="game-container">
-                    <h4>3. اختبار سرعة التفاعل</h4>
-                    <p>اضغط بأسرع ما يمكن لتسجيل سرعة رد فعلك!</p>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px; background: #2ed573;" onclick="playG3()">اضغط هنا الآن</button>
+                    <h4>3. سرعة التفاعل</h4>
+                    <button class="btn" style="width:auto; padding:6px 15px; background:#2ed573;" onclick="playG3()">اضغط هنا الآن</button>
                     <p id="g3-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-4" class="game-container">
-                    <h4>4. تحدي الجمع الذهني</h4>
-                    <p>ما ناتج جمع: <span id="math-q" style="color:var(--we-purple); font-weight:bold;"></span> ؟</p>
-                    <input type="number" id="g4-input" placeholder="الناتج">
-                    <br>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG4()">تحقق</button>
+                    <h4>4. الجمع الذهني</h4>
+                    <p>ناتج جمع: <span id="math-q" style="color:var(--we-purple); font-weight:bold;"></span></p>
+                    <input type="number" id="g4-input">
+                    <br><button class="btn" style="width:auto; padding:6px 15px; margin-top:8px;" onclick="playG4()">تحقق</button>
                     <p id="g4-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-5" class="game-container">
-                    <h4>5. تخمين لون الحظ</h4>
-                    <p>اختر اللون (أحمر أم أزرق):</p>
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <h4>5. لون الحظ</h4>
+                    <div style="display:flex; gap:10px; margin-top:10px;">
                         <button class="btn" style="width:auto; background:#ff4757;" onclick="playG5('أحمر')">أحمر</button>
                         <button class="btn" style="width:auto; background:#1e90ff;" onclick="playG5('أزرق')">أزرق</button>
                     </div>
@@ -581,25 +584,22 @@
                 </div>
 
                 <div id="game-6" class="game-container">
-                    <h4>6. عداد إبداعك اليومي</h4>
-                    <p>اكتشف نسبة نشاطك البرمجي اليوم:</p>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG6()">اكشف النسبة</button>
+                    <h4>6. كفاءتك اليومية</h4>
+                    <button class="btn" style="width:auto; padding:6px 15px;" onclick="playG6()">اكشف النسبة</button>
                     <p id="g6-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-7" class="game-container">
-                    <h4>7. اختبار الذاكرة الرقمية</h4>
-                    <p>احفظ الكود التالي: <span style="color:var(--we-purple); font-weight:bold;">8492</span></p>
-                    <input type="text" id="g7-input" placeholder="اكتب الكود المذكور">
-                    <br>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG7()">فحص</button>
+                    <h4>7. الذاكرة الرقمية</h4>
+                    <p>الكود: <span style="color:var(--we-purple); font-weight:bold;">8492</span></p>
+                    <input type="text" id="g7-input">
+                    <br><button class="btn" style="width:auto; padding:6px 15px; margin-top:8px;" onclick="playG7()">فحص</button>
                     <p id="g7-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-8" class="game-container">
-                    <h4>8. لعبة حجر، ورقة، مقص</h4>
-                    <p>اختر حركتك ضد النظام:</p>
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;">
+                    <h4>8. حجر ورقة مقص</h4>
+                    <div style="display:flex; gap:8px; margin-top:10px;">
                         <button class="btn" style="width:auto;" onclick="playG8('حجر')">حجر</button>
                         <button class="btn" style="width:auto;" onclick="playG8('ورقة')">ورقة</button>
                         <button class="btn" style="width:auto;" onclick="playG8('مقص')">مقص</button>
@@ -608,226 +608,245 @@
                 </div>
 
                 <div id="game-9" class="game-container">
-                    <h4>9. حاسبة عمرك بالدقائق</h4>
-                    <p>اكتب عمرك الحالي بالسنوات:</p>
+                    <h4>9. عمرك بالدقائق</h4>
                     <input type="number" id="g9-input" placeholder="عمرك بالسنوات">
-                    <br>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG9()">احسب</button>
+                    <br><button class="btn" style="width:auto; padding:6px 15px; margin-top:8px;" onclick="playG9()">احسب</button>
                     <p id="g9-res" style="margin-top:10px; font-weight:bold;"></p>
                 </div>
 
                 <div id="game-10" class="game-container">
-                    <h4>10. رسالة التحفيز التقني</h4>
-                    <p>احصل على عبارة تحفيزية لمهندس المستقبل:</p>
-                    <button class="btn" style="width:auto; padding: 6px 15px; margin-top: 8px;" onclick="playG10()">الحصول على رسالة</button>
+                    <h4>10. رسالة تحفيزية</h4>
+                    <button class="btn" style="width:auto; padding:6px 15px;" onclick="playG10()">إظهار</button>
                     <p id="g10-res" style="margin-top:10px; font-weight:bold; color:var(--we-purple);"></p>
                 </div>
-
             </div>
 
             <!-- تبويب منظم اليوم -->
             <div id="planner" class="tab-content">
-                <h3>جدول تنظيم مهام الطالب اليومية</h3>
+                <h3>منظم المهام الشخصية</h3>
                 <div class="todo-input-group">
-                    <input type="text" id="taskInput" placeholder="أضف مهمة جديدة (مثلاً: مشاهدة درس Math وحل الواجب)">
-                    <button class="btn" style="width: auto; padding: 12px 20px;" onclick="addTask()">إضافة للمنظم</button>
+                    <input type="text" id="taskInput" placeholder="أضف مهمة شخصية...">
+                    <button class="btn" style="width:auto; padding:12px 20px;" onclick="addTask()">إضافة</button>
                 </div>
-                <ul id="taskList">
-                    <!-- المهام تظهر هنا -->
-                </ul>
+                <ul id="taskList"></ul>
             </div>
         </div>
     </div>
 
     <script>
-        // بيانات الدخول الرسمية للمشروع
-        const correctUser = "A-1";
-        const correctPass = "o90po90p";
+        const users = {
+            "A-1": "o90po90p",
+            "weismailia": "we10203040"
+        };
+
+        window.addEventListener("DOMContentLoaded", function() {
+            const logged = localStorage.getItem("we_logged");
+            const role = localStorage.getItem("we_role");
+            if (logged === "true" && role) {
+                initSession(role);
+            }
+        });
+
+        function switchToAdminMode() {
+            document.getElementById("login-title").innerText = "بوابة دخول الإدارة";
+            document.getElementById("login-subtitle").innerText = "أدخل بيانات حساب الإدارة الخاص بك (weismailia)";
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("username").focus();
+            document.getElementById("error").innerText = "";
+        }
 
         function login() {
-            const uInput = document.getElementById("username");
-            const pInput = document.getElementById("password");
+            const u = document.getElementById("username").value.trim();
+            const p = document.getElementById("password").value.trim();
             const err = document.getElementById("error");
 
-            if (!uInput || !pInput || !err) return;
-
-            let u = uInput.value.trim();
-            let p = pInput.value.trim();
-
-            if (u === correctUser && p === correctPass) {
+            if (users[u] && users[u] === p) {
                 err.innerText = "";
-                document.getElementById("login-screen").style.display = "none";
-                document.getElementById("app-screen").style.display = "flex";
+                let role = (u === "weismailia") ? "admin" : "student";
+                localStorage.setItem("we_logged", "true");
+                localStorage.setItem("we_role", role);
+                initSession(role);
             } else {
                 err.innerText = "خطأ في اسم المستخدم أو كلمة المرور!";
             }
         }
 
+        function initSession(role) {
+            document.getElementById("login-screen").style.display = "none";
+            document.getElementById("app-screen").style.display = "flex";
+
+            const adminBox = document.getElementById("admin-homework-box");
+            const title = document.getElementById("header-title");
+
+            if (role === "admin") {
+                if (adminBox) adminBox.style.display = "block";
+                if (title) title.innerText = "لوحة تحكم الإدارة - مدرسة WE";
+            } else {
+                if (adminBox) adminBox.style.display = "none";
+                if (title) title.innerText = "منصة تكنولوجيا المستقبل";
+            }
+            loadHomeworks();
+        }
+
         function logout() {
+            localStorage.removeItem("we_logged");
+            localStorage.removeItem("we_role");
             document.getElementById("login-screen").style.display = "flex";
             document.getElementById("app-screen").style.display = "none";
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
             document.getElementById("error").innerText = "";
+            document.getElementById("login-title").innerText = "بوابة الدخول";
+            document.getElementById("login-subtitle").innerText = "منصة مدرسة WE للتكنولوجيا التطبيقية";
         }
 
         function switchTab(tabId, btn) {
-            let tabs = document.querySelectorAll('.tab-content');
-            tabs.forEach(t => t.classList.remove('active'));
-
-            let buttons = document.querySelectorAll('nav button');
-            buttons.forEach(b => b.classList.remove('active'));
-
-            let targetTab = document.getElementById(tabId);
+            document.querySelectorAll('.tab-content').forEach(function(t) {
+                t.classList.remove('active');
+            });
+            document.querySelectorAll('nav button').forEach(function(b) {
+                b.classList.remove('active');
+            });
+            
+            const targetTab = document.getElementById(tabId);
             if (targetTab) targetTab.classList.add('active');
             if (btn) btn.classList.add('active');
         }
 
-        function openGame(gameNum) {
-            let containers = document.querySelectorAll('.game-container');
-            containers.forEach(c => c.classList.remove('active'));
+        function addHomework() {
+            const input = document.getElementById("homeworkInput");
+            const text = input.value.trim();
+            if (!text) return;
 
-            let target = document.getElementById('game-' + gameNum);
-            if(target) target.classList.add('active');
-
-            if(gameNum === 4) initMathGame();
+            let list = JSON.parse(localStorage.getItem("we_homeworks") || "[]");
+            list.push(text);
+            localStorage.setItem("we_homeworks", JSON.stringify(list));
+            input.value = "";
+            loadHomeworks();
         }
 
-        // الألعاب
-        let secret1 = Math.floor(Math.random() * 10) + 1;
+        function loadHomeworks() {
+            const ul = document.getElementById("homeworkList");
+            if (!ul) return;
+            ul.innerHTML = "";
+
+            let list = JSON.parse(localStorage.getItem("we_homeworks") || "[]");
+            const role = localStorage.getItem("we_role");
+
+            if (list.length === 0) {
+                ul.innerHTML = "<p style='color:#777; font-size:14px; padding:10px;'>لا توجد واجبات مطلوبة حالياً من الإدارة.</p>";
+                return;
+            }
+
+            list.forEach(function(hw, idx) {
+                let li = document.createElement("li");
+                let actionBtn = (role === "admin") 
+                    ? '<button onclick="deleteHomework(' + idx + ')">حذف الواجب</button>' 
+                    : '<span style="color:#0099bb; font-size:12px; font-weight:bold;">مطلوب من الإدارة</span>';
+                
+                li.innerHTML = '<span>📌 ' + hw + '</span> ' + actionBtn;
+                ul.appendChild(li);
+            });
+        }
+
+        function deleteHomework(idx) {
+            let list = JSON.parse(localStorage.getItem("we_homeworks") || "[]");
+            list.splice(idx, 1);
+            localStorage.setItem("we_homeworks", JSON.stringify(list));
+            loadHomeworks();
+        }
+
+        function openGame(num) {
+            document.querySelectorAll('.game-container').forEach(function(c) {
+                c.classList.remove('active');
+            });
+            const targetGame = document.getElementById('game-' + num);
+            if (targetGame) targetGame.classList.add('active');
+            if (num === 4) initMath();
+        }
+
+        let s1 = Math.floor(Math.random() * 10) + 1;
         function playG1() {
             let val = parseInt(document.getElementById("g1-input").value);
             let res = document.getElementById("g1-res");
-            if(val === secret1) {
-                res.style.color = "green";
-                res.innerText = "🎉 برافو! خمنت الرقم الصحيح.";
-                secret1 = Math.floor(Math.random() * 10) + 1;
-            } else if(val < secret1) {
-                res.style.color = "orange";
-                res.innerText = "📈 الرقم أعلى من كده!";
-            } else {
-                res.style.color = "orange";
-                res.innerText = "📉 الرقم أقل من كده!";
-            }
+            if(val === s1) { res.style.color="green"; res.innerText="🎉 برافو!"; s1 = Math.floor(Math.random()*10)+1; }
+            else { res.style.color="orange"; res.innerText="❌ حاول مجدداً"; }
         }
 
         function playG2() {
-            let dice = Math.floor(Math.random() * 6) + 1;
-            document.getElementById("g2-res").innerText = "🎲 نتيجة رمي النرد: " + dice;
+            document.getElementById("g2-res").innerText = "🎲 النرد: " + (Math.floor(Math.random()*6)+1);
         }
 
-        let startTime;
         function playG3() {
-            startTime = new Date().getTime();
-            setTimeout(() => {
-                document.getElementById("g3-res").innerText = "⏱️ تم تسجيل سرعة رد فعلك بنجاح!";
-            }, 200);
+            setTimeout(function() { document.getElementById("g3-res").innerText = "⏱️ تم التسجيل!"; }, 150);
         }
 
-        let numA, numB;
-        function initMathGame() {
-            numA = Math.floor(Math.random() * 20) + 1;
-            numB = Math.floor(Math.random() * 20) + 1;
-            let mathQ = document.getElementById("math-q");
-            if (mathQ) mathQ.innerText = `${numA} + ${numB}`;
+        let mA, mB;
+        function initMath() {
+            mA = Math.floor(Math.random()*15)+1;
+            mB = Math.floor(Math.random()*15)+1;
+            const qSpan = document.getElementById("math-q");
+            if (qSpan) qSpan.innerText = mA + " + " + mB;
         }
+
         function playG4() {
             let ans = parseInt(document.getElementById("g4-input").value);
             let res = document.getElementById("g4-res");
-            if(ans === (numA + numB)) {
-                res.style.color = "green";
-                res.innerText = "✨ إجابة صحيحة وعبقرية!";
-                initMathGame();
-            } else {
-                res.style.color = "red";
-                res.innerText = "❌ حاول مرة أخرى.";
-            }
+            if(ans === (mA + mB)) { res.style.color="green"; res.innerText="✨ صحيح!"; initMath(); }
+            else { res.style.color="red"; res.innerText="❌ خطأ"; }
         }
 
-        function playG5(choice) {
+        function playG5(c) {
             let colors = ['أحمر', 'أزرق'];
-            let luck = colors[Math.floor(Math.random() * colors.length)];
+            let luck = colors[Math.floor(Math.random()*colors.length)];
             let res = document.getElementById("g5-res");
-            if(choice === luck) {
-                res.style.color = "green";
-                res.innerText = `🎯 مبروك! اخترت اللون الصحيح (${luck}).`;
-            } else {
-                res.style.color = "orange";
-                res.innerText = `❌ لون الحظ كان (${luck}).`;
-            }
+            if(c === luck) { res.style.color="green"; res.innerText="🎯 فزت (" + luck + ")"; }
+            else { res.style.color="orange"; res.innerText="❌ كان (" + luck + ")"; }
         }
 
         function playG6() {
-            let luckNum = Math.floor(Math.random() * 101);
-            document.getElementById("g6-res").innerText = `⚡ نسبة كفاءتك البرمجية اليوم: ${luckNum}%`;
+            document.getElementById("g6-res").innerText = "⚡ كفاءتك: " + Math.floor(Math.random()*101) + "%";
         }
 
         function playG7() {
-            let val = document.getElementById("g7-input").value;
+            let v = document.getElementById("g7-input").value;
             let res = document.getElementById("g7-res");
-            if(val === "8492") {
-                res.style.color = "green";
-                res.innerText = "🧠 ذاكرتك ممتازة!";
-            } else {
-                res.style.color = "red";
-                res.innerText = "❌ الكود الصحيح هو 8492.";
-            }
+            if(v === "8492") { res.style.color="green"; res.innerText="🧠 ممتاز!"; }
+            else { res.style.color="red"; res.innerText="❌ خطأ (8492)"; }
         }
 
-        function playG8(playerChoice) {
-            let options = ['حجر', 'ورقة', 'مقص'];
-            let compChoice = options[Math.floor(Math.random() * options.length)];
+        function playG8(p) {
+            const arr = ['حجر', 'ورقة', 'مقص'];
+            let comp = arr[Math.floor(Math.random()*arr.length)];
             let res = document.getElementById("g8-res");
-            if(playerChoice === compChoice) {
-                res.style.color = "orange";
-                res.innerText = `🤝 تعادل! الكمبيوتر اختار (${compChoice})`;
-            } else if(
-                (playerChoice === 'حجر' && compChoice === 'مقص') ||
-                (playerChoice === 'ورقة' && compChoice === 'حجر') ||
-                (playerChoice === 'مقص' && compChoice === 'ورقة')
-            ) {
-                res.style.color = "green";
-                res.innerText = `🎉 فزت! الكمبيوتر اختار (${compChoice})`;
-            } else {
-                res.style.color = "red";
-                res.innerText = `😢 خسرت! الكمبيوتر اختار (${compChoice})`;
-            }
+            if(p === comp) { res.style.color="orange"; res.innerText="🤝 تعادل (" + comp + ")"; }
+            else if((p==='حجر'&&comp==='مقص')||(p==='ورقة'&&comp==='حجر')||(p==='مقص'&&comp==='ورقة')) {
+                res.style.color="green"; res.innerText="🎉 فزت ضد (" + comp + ")";
+            } else { res.style.color="red"; res.innerText="😢 خسرت ضد (" + comp + ")"; }
         }
 
         function playG9() {
             let age = parseFloat(document.getElementById("g9-input").value);
             let res = document.getElementById("g9-res");
-            if(isNaN(age) || age <= 0) {
-                res.innerText = "الرجاء إدخال عمر صحيح.";
-            } else {
-                let mins = age * 365 * 24 * 60;
-                res.style.color = "blue";
-                res.innerText = `⏳ عمرك يعادل تقريباً: ${mins.toLocaleString()} دقيقة من المعرفة!`;
-            }
+            if(isNaN(age)) res.innerText="أدخل عمر صحيح";
+            else res.innerText="⏳ تقريباً " + (age*365*24*60).toLocaleString() + " دقيقة";
         }
 
         function playG10() {
-            let msgs = [
-                "🚀 مبرمج الغد يبدأ اليوم، استمر في التعلم!",
-                "💡 كل سطر برمجي يفتح لك باباً جديداً من الإمكانيات.",
-                "⭐ مدرسة WE تفتح لك أبواب التكنولوجيا التطبيقية، فكن على قدر المسؤولية.",
-                "🔥 العقول العظيمة تصنع البرمجيات التي تغير العالم!"
-            ];
-            document.getElementById("g10-res").innerText = msgs[Math.floor(Math.random() * msgs.length)];
+            const msgs = ["🚀 استمر في التطور!", "💡 البرمجة مستقبلنا.", "⭐ مدرسة WE تصنع القادة."];
+            document.getElementById("g10-res").innerText = msgs[Math.floor(Math.random()*msgs.length)];
         }
 
-        // منظم اليوم
         function addTask() {
-            let taskInput = document.getElementById("taskInput");
-            let text = taskInput.value.trim();
-            if(text === "") return;
-
+            let input = document.getElementById("taskInput");
+            let t = input.value.trim();
+            if(!t) return;
             let ul = document.getElementById("taskList");
             let li = document.createElement("li");
-            li.innerHTML = `<span>${text}</span> <button onclick="this.parentElement.remove()">إنجاز / حذف</button>`;
+            li.innerHTML = '<span>' + t + '</span> <button onclick="this.parentElement.remove()">حذف</button>';
             ul.appendChild(li);
-
-            taskInput.value = "";
+            input.value = "";
         }
     </script>
 </body>
