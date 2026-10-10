@@ -184,52 +184,92 @@
             background: rgba(15, 12, 41, 0.95);
             backdrop-filter: blur(10px);
             color: white;
-            padding: 15px 20px;
+            padding: 12px 15px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             gap: 12px;
             border-bottom: 3px solid var(--we-cyan);
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
+        @media (min-width: 768px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 15px 35px;
+            }
+        }
+
         header .header-title {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            header .header-title {
+                width: auto;
+                justify-content: flex-start;
+            }
         }
 
         header h1 {
-            font-size: 17px;
+            font-size: 16px;
             color: var(--we-cyan);
             letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            header h1 {
+                font-size: 20px;
+            }
         }
 
         header .we-mini-logo {
             background: var(--we-cyan);
             color: #000;
             font-weight: 900;
-            padding: 4px 8px;
+            padding: 3px 8px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         nav {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 6px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                width: auto;
+                justify-content: flex-end;
+            }
         }
 
         nav button {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
-            padding: 7px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
             transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            nav button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
         }
 
         nav button:hover, nav button.active {
@@ -260,12 +300,6 @@
             .tab-content {
                 padding: 30px;
             }
-            header {
-                padding: 15px 35px;
-            }
-            header h1 {
-                font-size: 20px;
-            }
         }
 
         .tab-content.active {
@@ -277,7 +311,13 @@
             color: var(--we-purple);
             border-right: 5px solid var(--we-cyan);
             padding-right: 12px;
-            font-size: 19px;
+            font-size: 18px;
+        }
+
+        @media (min-width: 768px) {
+            h3 {
+                font-size: 22px;
+            }
         }
 
         /* المناهج التعليمية وتنسيق اللينكات */
@@ -291,7 +331,7 @@
         }
 
         .lesson-card h4 { color: var(--we-purple); margin-bottom: 6px; font-size: 16px; }
-        .lesson-card p { color: #555; line-height: 1.6; margin-bottom: 12px; font-size: 14px; }
+        .lesson-card p { color: #555; line-height: 1.6; margin-bottom: 12px; font-size: 14px; word-break: break-word; }
         
         .yt-link {
             display: inline-block;
@@ -311,7 +351,7 @@
         /* شاشة الألعاب الـ 10 */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -326,14 +366,21 @@
         .game-btn {
             background: #f1f3f5;
             border: 2px solid #d1d8e0;
-            padding: 12px 10px;
+            padding: 12px 8px;
             border-radius: 10px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
             color: #333;
+        }
+
+        @media (min-width: 768px) {
+            .game-btn {
+                font-size: 14px;
+                padding: 15px;
+            }
         }
 
         .game-btn:hover {
